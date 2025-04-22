@@ -18,3 +18,24 @@ function moveTarget() {
 
 // Initial target position
 moveTarget();
+
+target.addEventListener('contextmenu', (e) => {
+  e.preventDefault();  
+
+  score++;
+  scoreBoard.textContent = `Score: ${score}`;
+
+  moveTarget();
+});
+
+gameArea.addEventListener('contextmenu', (e) => {
+  e.preventDefault();  
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'F12') {
+    e.preventDefault();
+    score = 0;
+    scoreBoard.textContent = `Score: ${score}`;
+  }
+});
