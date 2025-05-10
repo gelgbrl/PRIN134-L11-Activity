@@ -10,12 +10,19 @@ let clickedTargets = 0;
 
 gameArea.addEventListener('contextmenu', (e) => e.preventDefault());
 
+// Only reset score when F12 is pressed
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'F12') {
+    e.preventDefault();
+    score = 0;
+    scoreBoard.textContent = `Score: ${score}`;
+  }
+});
+
 btn.addEventListener('click', () => {
   gameArea.innerHTML = '';
-  score = 0;
   clickedTargets = 0;
   currentTargetIndex = 0;
-  scoreBoard.textContent = `Score: ${score}`;
 
   totalTargets = parseInt(numberInput.value, 10);
   if (isNaN(totalTargets) || totalTargets < 1 || totalTargets > 5) {
@@ -39,7 +46,7 @@ function createTarget(id) {
   target.addEventListener('click', () => {
     const clickedId = parseInt(target.dataset.id, 10);
     if (clickedId === currentTargetIndex) {
-      target.style.display = 'none'; // Hide the target
+      target.style.display = 'none'; // Hide the clicked target
       currentTargetIndex++;
       clickedTargets++;
 
